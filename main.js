@@ -10,7 +10,7 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 
 // VARIABLES
-let theme = 'dark';
+let theme = 'light';
 let bookCover = null;
 let lightSwitch = null;
 let bookPage = null;
