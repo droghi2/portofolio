@@ -32,13 +32,13 @@
   padding: 0;
 }
 
-.light-theme {
+.dark-theme {
   --color-text: var(--color-text-light);
   --color-background: var(--color-background-light);
   --color-background-icon: var(--color-background-icon-light);
 }
 
-.dark-theme {
+.light-theme {
   --color-text: var(--color-text-dark);
   --color-background: var(--color-background-dark);
   --color-background-icon: var(--color-background-icon-dark);
