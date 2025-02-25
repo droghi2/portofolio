@@ -88,7 +88,8 @@ let projectsCameraRot = {
   z: 0,
 };
 
-
+// Call switchTheme to apply the dark theme
+switchTheme(theme);
 // SCENE & CAMERA
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
