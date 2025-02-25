@@ -10,7 +10,7 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 
 // VARIABLES
-let theme = 'light';
+let theme = 'dark';
 let bookCover = null;
 let lightSwitch = null;
 let bookPage = null;
@@ -380,10 +380,10 @@ function loadIntroText() {
 }
 
 function switchTheme(themeType) {
-  if (themeType === 'dark') {
+  if (themeType === 'light') {
     lightSwitch.rotation.z = Math.PI / 7;
-    document.body.classList.remove('light-theme');
-    document.body.classList.add('dark-theme');
+    document.body.classList.remove('dark-theme');
+    document.body.classList.add('light-theme');
 
     // main lights
     gsap.to(roomLight.color, {
@@ -449,8 +449,8 @@ function switchTheme(themeType) {
     });
   } else {
     lightSwitch.rotation.z = 0;
-    document.body.classList.remove('dark-theme');
-    document.body.classList.add('light-theme');
+    document.body.classList.remove('light-theme');
+    document.body.classList.add('dark-theme');
 
     // main light
     gsap.to(roomLight.color, {
@@ -585,7 +585,7 @@ function resetCamera() {
   gsap.delayedCall(1.5, enableOrbitControls);
 
   // reset dimmed light for about display
-  if (theme !== 'dark') {
+  if (theme !== 'light') {
     gsap.to(roomLight, {
       intensity: 2.5,
       duration: 1.5,
@@ -618,7 +618,7 @@ function cameraToAbout() {
   });
 
   // prevent about text clutter due to bright light
-  if (theme !== 'dark') {
+  if (theme !== 'light') {
     gsap.to(roomLight, {
       intensity: 1,
       duration: 1.5,
@@ -779,7 +779,7 @@ function init3DWorldClickListeners() {
 
   window.addEventListener('click', function (e) {
     // store value set to prevent multi time update in foreach loop
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
 
     // prevent about focus on button click which are positioned above book in mobile view
     const closeBtn = document.getElementById('close-btn');
