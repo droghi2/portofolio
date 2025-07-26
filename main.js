@@ -796,7 +796,8 @@ function init3DWorldClickListeners() {
     mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1;
     mousePosition.y = -(e.clientY / window.innerHeight) * 2 + 1;
     raycaster.setFromCamera(mousePosition, camera);
-    intersects = raycaster.intersectObjects(scene.children);
+    intersects = raycaster.intersectObjects(scene.children, true); // <-- this enables recursive check
+
     intersects.forEach((intersect) => {
       if (intersect.object.name === 'project') {
         const textureImage = intersect.object.material.map.image;
