@@ -10,7 +10,7 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 
 // VARIABLES
-let theme = 'light';
+let theme = 'dark';
 let bookCover = null;
 let lightSwitch = null;
 let bookPage = null;
@@ -91,7 +91,7 @@ let projectsCameraRot = {
   z: 0,
 };
 
-
+document.body.classList.add('dark-theme');
 // SCENE & CAMERA
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -257,6 +257,8 @@ gltfLoader.load(
     projectsMenuListener();
     init3DWorldClickListeners();
     initResponsive(room.scene);
+
+    switchTheme('dark');
   },
   function (error) {
     console.error(error);
