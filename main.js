@@ -806,15 +806,7 @@ function init3DWorldClickListeners() {
         const overlay = document.getElementById('image-overlay');
 
         fullImage.src = imageSrc;
-        overlay.classList.add('show');
-
-        // Reset styles before animating
-        gsap.set(fullImage, { scale: 0.8, opacity: 0 });
-        gsap.set(overlay, { opacity: 0 });
-
-        // Animate both overlay and image
-        gsap.to(overlay, { opacity: 1, duration: 0.3, ease: "power2.out" });
-        gsap.to(fullImage, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)", delay: 0.1 });
+        overlay.classList.remove('hidden');
       }
 
       if (
@@ -839,25 +831,9 @@ function init3DWorldClickListeners() {
 
 
 
-document.getElementById('image-close').addEventListener('click', () => {
-  const overlay = document.getElementById('image-overlay');
-  const fullImage = document.getElementById('full-image');
 
-  // Animate out
-  gsap.to(fullImage, {
-    scale: 0.8,
-    opacity: 0,
-    duration: 0.3,
-    ease: 'power2.in'
-  });
-  gsap.to(overlay, {
-    opacity: 0,
-    duration: 0.3,
-    ease: 'power2.in',
-    onComplete: () => {
-      overlay.classList.remove('show');
-    }
-  });
+document.getElementById('image-close').addEventListener('click', () => {
+  document.getElementById('image-overlay').classList.add('hidden');
 });
 
 
