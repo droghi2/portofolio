@@ -308,6 +308,25 @@ scene.add(pointLight2);
 scene.add(pointLight3);
 scene.add(pointLight4);
 
+
+// --- FORCE DARK THEME LIGHTS ON START ---
+if (theme === 'dark') {
+  // These match your switchTheme('dark') target values
+  roomLight.color.setRGB(0.2725, 0.2313, 0.6863); // dark bluish
+  ambientLight.color.setRGB(0.1725, 0.2313, 0.6863); // even darker
+  roomLight.intensity = 1.5;
+  ambientLight.intensity = 0.3;
+
+  // Text point lights for dark mode
+  pointLight1.intensity = 0.6;
+  pointLight2.intensity = 0.6;
+  pointLight3.intensity = 0.6;
+  pointLight4.intensity = 0.6;
+
+  // Optional: Set fan light color/distances if you want those to match
+  fanLight5.distance = 0.07;
+}
+
 // SETUP HELPERS
 // const axesHelper = new THREE.AxesHelper(5);
 // scene.add(axesHelper);
