@@ -29,8 +29,11 @@ let clipNames = [
 ];
 let projects = [
   
-  { images: ['textures/Main/Main_CloudyGrass.png', 'textures/SnowArea.png', 'textures/CaveEntrance.png'], url: 'http://example.com/project1' },
-  { images: ['textures/Main/Main_WholeMainArea.png', 'textures/SnowTODesert.png', 'textures/CaveWithLake.png'], url: 'http://example.com/project2' },
+  { images: ['textures/Main/Main_CloudyGrass.png', 'textures/Forest/Forest_ClearSkies2.png', 'textures/Snow/Snow_Entrance.png', 'textures/Desert/Desert_ClearSkiesWIthGrass.png', 'textures/Cave/Cave_Main.png'], url: 'http://example.com/project1' },
+  { images: ['textures/Main/Main_WholeMainArea.png', 'textures/Forest/Forest_ClearSkies.png', 'textures/Snow/Snow_Forest.png', 'textures/Desert/Desert_ClearSkies.png', 'textures/Cave/Cave_Main2.png'], url: 'http://example.com/project2' },
+  { images: ['textures/Main/Main_GrassToDesert.png', 'textures/Forest/Forest_Lake.png', 'textures/Snow/Snow_RocksMapEnd.png', 'textures/Desert/Desert_Cloudy.png', 'textures/Cave/Cave_WithLake.png'], url: 'http://example.com/project3' },
+  { images: ['textures/Main/Main_FoggyGrass.png', 'textures/Forest/Forest_Cloudy.png', 'textures/Snow/Snow_ToGrassMain.png', 'textures/Desert/Desert_SandStormHeavy.png', 'textures/Cave/Cave_Entrance.png'], url: 'http://example.com/project4' },
+  { images: ['textures/Main/Main_LakeGrass.png', 'textures/Forest/Forest_CaveFoggy.png', 'textures/Snow/Snow_Blizzard.png', 'textures/Desert/Desert_SandStorm.png', 'textures/Cave/Cave_Hole.png'], url: 'http://example.com/project5' },
   // { images: ['test.png', 'test2.png'], url: 'http://example.com/project3' },
   // { images: ['project4_1.jpg', 'project4_2.jpg'], url: 'http://example.com/project4' },
   // { images: ['project5_1.jpg', 'project5_2.jpg'], url: 'http://example.com/project5' },  
