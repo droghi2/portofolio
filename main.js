@@ -674,31 +674,36 @@ function projectsMenuListener() {
 
   // Reusable animation function for updating the texture and animating
   function updateImageWithAnimation(project, index) {
-    const mat = project.mesh.material;
     const newTexture = new THREE.TextureLoader().load(project.images[project.imageIndex]);
 
-    // Kill ONLY opacity tweens (do not set to 0, just cancel running ones)
-    gsap.killTweensOf(mat, "opacity");
-
-    // Fade out from the *current* opacity
-    gsap.to(mat, {
+    // Animate the material opacity and Y-axis movement
+    gsap.to(project.mesh.material, {
       opacity: 0,
-      duration: 0.18,
+      duration: 0.2,
       onComplete: () => {
-        // Change the texture after fade-out
-        mat.map = newTexture;
-        mat.needsUpdate = true;
+        project.mesh.material.map = newTexture;
+        project.mesh.material.needsUpdate = true;
 
-        // Fade back in (from 0 to 1)
-        gsap.to(mat, {
+        // Animate back in with Y-axis movement, scaling, and opacity
+        gsap.to(project.mesh.material, {
           opacity: 1,
-          duration: 0.36,
-          overwrite: 'auto', // ensures this fade-in can't overlap with another fade-in
+          duration: 1.5,
+          delay: 0.5 + index * 0.1, // Add delay for consecutive appearance
         });
-      }
+        gsap.fromTo(
+          project.mesh.scale,
+          { x: 0.95, y: 0.95 },
+          { x: 1, y: 1, duration: 0.5, delay: index * 0.1 }
+        );
+        // Animate movement from slightly below its final Y position
+        gsap.fromTo(
+          project.mesh.position,
+          { y: project.y - 0.2 }, // Start slightly below
+          { y: project.y, duration: 0.5, delay: index * 0.1 }
+        );
+      },
     });
   }
-
 
   // Handle desktop scroll event (PC)
   document.addEventListener('wheel', function (e) {
