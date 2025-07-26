@@ -638,6 +638,7 @@ function aboutMenuListener() {
 
 projects.forEach(project => project.imageIndex = 0);
 
+let scrollLocked = false;
 function projectsMenuListener() {
   // Create project planes with textures
   projects.forEach((project, i) => {
@@ -670,13 +671,8 @@ function projectsMenuListener() {
   });
 
   // Reusable animation function for updating the texture and animating
-  function updateImageWithAnimation(project, index) {
+  function updateImageWithAnimation(project, index, onCompleteAll) {
     const newTexture = new THREE.TextureLoader().load(project.images[project.imageIndex]);
-
-    // Kill ongoing tweens to prevent overlap
-    gsap.killTweensOf(project.mesh.material);
-    gsap.killTweensOf(project.mesh.scale);
-    gsap.killTweensOf(project.mesh.position);
 
     // Animate the material opacity and Y-axis movement
     gsap.to(project.mesh.material, {
@@ -686,41 +682,54 @@ function projectsMenuListener() {
         project.mesh.material.map = newTexture;
         project.mesh.material.needsUpdate = true;
 
+        // Animate back in with Y-axis movement, scaling, and opacity
         gsap.to(project.mesh.material, {
           opacity: 1,
           duration: 1.5,
-          delay: 0.5 + index * 0.1,
+          delay: 0.5 + index * 0.1, // Add delay for consecutive appearance
         });
         gsap.fromTo(
           project.mesh.scale,
           { x: 0.95, y: 0.95 },
           { x: 1, y: 1, duration: 0.5, delay: index * 0.1 }
         );
+        // Animate movement from slightly below its final Y position
         gsap.fromTo(
           project.mesh.position,
           { y: project.y - 0.2 },
-          { y: project.y, duration: 0.5, delay: index * 0.1 }
+          {
+            y: project.y,
+            duration: 0.5,
+            delay: index * 0.1,
+            onComplete: onCompleteAll
+          }
         );
       },
     });
   }
 
   // Handle desktop scroll event (PC)
-  let scrollTimeout = null;
   document.addEventListener('wheel', function (e) {
-    if (scrollTimeout) return;
+    if (scrollLocked) return;
 
+    scrollLocked = true; // prevent further scrolling
     const direction = e.deltaY > 0 ? 1 : -1;
+
+    let completedAnimations = 0;
+    const totalProjects = projects.length;
 
     projects.forEach((project, i) => {
       project.imageIndex = (project.imageIndex + direction + project.images.length) % project.images.length;
-      updateImageWithAnimation(project, i);
-    });
 
-    scrollTimeout = setTimeout(() => {
-      scrollTimeout = null;
-    }, 300); // 300ms delay to throttle fast scrolling
+      updateImageWithAnimation(project, i, () => {
+        completedAnimations++;
+        if (completedAnimations === totalProjects) {
+          scrollLocked = false; // unlock only after all animations are done
+        }
+      });
+    });
   });
+
 
   // Variables to track touch positions for mobile
   let touchStartX = 0;
