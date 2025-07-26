@@ -466,3 +466,12 @@ footer {
 #image-overlay.hidden {
   display: none;
 }
+
+
+body.no-scroll {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  touch-action: none; /* Prevents scrolling on mobile */
+}

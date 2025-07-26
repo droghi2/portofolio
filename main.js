@@ -808,7 +808,8 @@ function init3DWorldClickListeners() {
 
         fullImage.src = imageSrc;
         overlay.classList.remove('hidden');
-
+        document.body.classList.add('no-scroll'); // <-- Block background scroll
+        
         // ✅ Add download handler here
         const downloadBtn = document.getElementById('image-download');
         downloadBtn.onclick = () => {
@@ -848,6 +849,7 @@ function init3DWorldClickListeners() {
 
 document.getElementById('image-close').addEventListener('click', () => {
   document.getElementById('image-overlay').classList.add('hidden');
+  document.body.classList.remove('no-scroll'); // <-- Unblock scroll
 });
 
 
