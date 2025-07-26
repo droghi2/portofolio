@@ -384,7 +384,6 @@ function loadIntroText() {
 
 
 
-    // --- ADD THIS BLOCK ---
     if (theme === 'dark') {
       // Set colors as in your switchTheme('dark')
       titleText.material[0].color.setRGB(8, 8, 8);
@@ -410,6 +409,12 @@ function loadIntroText() {
     subtitleText.rotation.y = Math.PI * 0.5;
     subtitleText.position.set(-0.255, 0.5, 0.5);
     scene.add(subtitleText);
+    
+    // --- Force dark theme color on load ---
+    if (theme === 'dark') {
+      subtitleText.material[0].color.setRGB(8, 8, 8);
+      subtitleText.material[1].color.setRGB(5, 5, 5);
+    }
   });
 }
 
