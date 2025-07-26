@@ -806,6 +806,16 @@ function init3DWorldClickListeners() {
         const overlay = document.getElementById('image-overlay');
 
         fullImage.src = imageSrc;
+        document.getElementById('image-download').onclick = () => {
+          const image = document.getElementById('full-image');
+          const link = document.createElement('a');
+          const imageName = image.src.split('/').pop() || 'project-image.png';
+          link.href = image.src;
+          link.download = imageName;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        };
         overlay.classList.remove('hidden');
       }
 
