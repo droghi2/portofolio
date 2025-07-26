@@ -420,8 +420,8 @@ footer {
 }
 
 #full-image {
-  max-width: 75vw;
-  max-height: 65vh;
+  max-width: 92vw;
+  max-height: calc(100vh - 7rem); /* leave 7rem for both buttons */
   object-fit: contain;
   border-radius: 15px;
   box-shadow: 0 0 24px rgba(0,0,0,0.42);
