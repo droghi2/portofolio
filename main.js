@@ -799,8 +799,14 @@ function init3DWorldClickListeners() {
     intersects = raycaster.intersectObjects(scene.children);
     intersects.forEach((intersect) => {
       if (intersect.object.name === 'project') {
-        intersect.object.userData.url &&
-          window.open(intersect.object.userData.url);
+        const textureImage = intersect.object.material.map.image;
+        const imageSrc = textureImage.currentSrc || textureImage.src;
+
+        const fullImage = document.getElementById('full-image');
+        const overlay = document.getElementById('image-overlay');
+
+        fullImage.src = imageSrc;
+        overlay.classList.remove('hidden');
       }
 
       if (
@@ -822,6 +828,12 @@ function init3DWorldClickListeners() {
     });
   });
 }
+
+
+document.getElementById('image-close').addEventListener('click', () => {
+  document.getElementById('image-overlay').classList.add('hidden');
+});
+
 
 // RESPONSIVE
 function initResponsive(roomScene) {
