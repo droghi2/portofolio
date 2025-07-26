@@ -638,7 +638,6 @@ function aboutMenuListener() {
 
 projects.forEach(project => project.imageIndex = 0);
 
-let scrollLocked = false;
 function projectsMenuListener() {
   // Create project planes with textures
   projects.forEach((project, i) => {
@@ -671,7 +670,7 @@ function projectsMenuListener() {
   });
 
   // Reusable animation function for updating the texture and animating
-  function updateImageWithAnimation(project, index, onCompleteAll) {
+  function updateImageWithAnimation(project, index) {
     const newTexture = new THREE.TextureLoader().load(project.images[project.imageIndex]);
 
     // Animate the material opacity and Y-axis movement
@@ -696,13 +695,8 @@ function projectsMenuListener() {
         // Animate movement from slightly below its final Y position
         gsap.fromTo(
           project.mesh.position,
-          { y: project.y - 0.2 },
-          {
-            y: project.y,
-            duration: 0.5,
-            delay: index * 0.1,
-            onComplete: onCompleteAll
-          }
+          { y: project.y - 0.2 }, // Start slightly below
+          { y: project.y, duration: 0.5, delay: index * 0.1 }
         );
       },
     });
@@ -710,26 +704,13 @@ function projectsMenuListener() {
 
   // Handle desktop scroll event (PC)
   document.addEventListener('wheel', function (e) {
-    if (scrollLocked) return;
-
-    scrollLocked = true; // prevent further scrolling
     const direction = e.deltaY > 0 ? 1 : -1;
-
-    let completedAnimations = 0;
-    const totalProjects = projects.length;
 
     projects.forEach((project, i) => {
       project.imageIndex = (project.imageIndex + direction + project.images.length) % project.images.length;
-
-      updateImageWithAnimation(project, i, () => {
-        completedAnimations++;
-        if (completedAnimations === totalProjects) {
-          scrollLocked = false; // unlock only after all animations are done
-        }
-      });
+      updateImageWithAnimation(project, i); // Apply animation with index-based delay
     });
   });
-
 
   // Variables to track touch positions for mobile
   let touchStartX = 0;
@@ -847,6 +828,7 @@ function init3DWorldClickListeners() {
     });
   });
 }
+
 
 
 document.getElementById('image-close').addEventListener('click', () => {
