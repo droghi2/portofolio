@@ -431,19 +431,22 @@ footer {
 .image-button {
   background: none;
   border: none;
-  color: #fff;
-  font-size: 2.1rem;
-  padding: 0;
+  color: #fff; /* uses currentColor for SVG */
+  padding: 8px;
   margin: 0;
   cursor: pointer;
-  box-shadow: none;
-  border-radius: 0;
+  border-radius: 50%;
   outline: none;
-  transition: transform 0.12s;
+  transition: transform 0.14s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .image-button:hover {
-  transform: scale(1.2);
+  transform: scale(1.14);
+  background: rgba(80,80,80,0.13);
 }
+
 
 /* Close: top right */
 .image-close {
