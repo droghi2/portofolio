@@ -807,7 +807,20 @@ function init3DWorldClickListeners() {
 
         fullImage.src = imageSrc;
         overlay.classList.remove('hidden');
+
+        // ✅ Add download handler here
+        const downloadBtn = document.getElementById('image-download');
+        downloadBtn.onclick = () => {
+          const link = document.createElement('a');
+          const filename = imageSrc.split('/').pop() || 'project-image.png';
+          link.href = imageSrc;
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        };
       }
+
 
       if (
         intersect.object.name === 'Book' ||
