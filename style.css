@@ -455,10 +455,11 @@ footer {
 }
 
 #image-overlay img {
-  max-width: 90%;
-  max-height: 90%;
-  transform: scale(0.8);
-  opacity: 0;
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
+  opacity: 1;
+  transform: none;
 }
 
 #image-overlay.hidden {
