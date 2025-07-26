@@ -381,7 +381,17 @@ function loadIntroText() {
     titleText.rotation.y = Math.PI * 0.5;
     titleText.position.set(-0.27, 0.55, 0.5);
     scene.add(titleText);
+
+
+
+    // --- ADD THIS BLOCK ---
+    if (theme === 'dark') {
+      // Set colors as in your switchTheme('dark')
+      titleText.material[0].color.setRGB(8, 8, 8);
+      titleText.material[1].color.setRGB(5, 5, 5);
+    }
   });
+
 
   loader.load('fonts/helvatica.json', function (font) {
     const textMaterials = [
